@@ -1,0 +1,44 @@
+server:
+  port: 1000
+  max-http-header-size: 3000
+  undertow:
+    threads:
+      io: 32
+    direct-buffers: true
+
+spring:
+  application:
+    name: provider
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+# Dubbo Config properties
+dubbo:
+  application:
+    metadata-type: local
+    id: ${spring.application.name}
+    name: ${spring.application.name}
+    version: 1.0.0
+    parameters:
+      { "grpc.maxInboundMessageSize": 104857600 }
+  protocol:
+    id: dubbo
+    name: ${dubbo.protocol.id}
+    serialization: hessian2
+    port: ${DUBBO_PORT:20896}
+    server: netty4
+    threads: 16
+  scan:
+    base-packages: org.example.provider.svc.impl
+  provider:
+    timeout: 100000
+  consumer:
+    timeout: 100000
+
+  registry:
+    id: none
+    # 不使用注册中心
+    address: N/A
+#  metadata-report:
+#    address: redis://none:${spring.redis.password}@${spring.redis.host}:${spring.redis.port}
+
