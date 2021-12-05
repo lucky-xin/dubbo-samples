@@ -5,6 +5,8 @@ import lombok.Data;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * MongoDB 数据
@@ -19,5 +21,11 @@ public class QueryData implements Serializable {
     private ObjectId id;
 
     private String name;
+
+    /**
+     * 排序字段
+     */
+//    private List<Map<Direction, List<String>>> sorts;
+    private List<String> sorts;
 
 }
